@@ -1,13 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      
-    </div>
-  );
+import Canvas from './wrapper';
+// import {Layer} from './fabric_canvas'
+class App extends React.Component {
+  
+  render() {
+  
+    return(
+      <div>
+         <p>
+           hello
+         </p>
+         <Canvas />
+      </div>
+    )
+  }
 }
 
 export default App;
