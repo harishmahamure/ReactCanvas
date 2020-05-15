@@ -34,7 +34,8 @@ class Canvas extends Component {
         });
         return (
             <React.Fragment>
-                <canvas id="container" ref={c=> (this.c = c) } width= {this.props.width} height= {this.props.height}/>
+                <div id="container" ref={c=> (this.c = c) }>
+                </div>
                 {this.state.canvas && children}
                 <p>hello</p>
             </React.Fragment>
