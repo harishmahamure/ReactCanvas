@@ -6,13 +6,11 @@ import Image from './Image';
 class App extends React.Component {
   state ={
     image: null,
-    base64: null
+    base64Image: null
   }
   handleChangeImage = e =>{
-    console.log(e);
     this.reader = new FileReader();
     this.file = e.target.files[0];
-    console.log(this.file);
     this.reader.addEventListener("load" ,(upload)=>{
       this.setState({
         image:upload.target
@@ -22,21 +20,30 @@ class App extends React.Component {
     });
     this.reader.readAsDataURL(this.file);
     setTimeout(()=>{
-      this.setState({base64:this.state.image.result});
+      this.setState({base64Image:this.state.image.result});
     },1000)
-    
-
+  }
+  renderPreview = () => {
+    if(!this.state.base64Image){
+      return null;
+    } 
+    return (
+       <div>
+         <img src={this.state.base64Image} alt="" width="100" height="100"/>
+       </div>
+     )
   }
   render() {
-      
     return(
+      
       <div>
          <Canvas>
              <Circle/>
-             <Image base64={this.state.base64}/>
+             <Image base64Image={this.state.base64Image}/>
         </Canvas>
         <br></br>
         <input type="file" ref="file" name="file" id="file" onChange={this.handleChangeImage} encType="multipart/form-data" required/>
+          <span>{this.renderPreview()}</span>
       </div>
     )
   }

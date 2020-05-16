@@ -21,8 +21,17 @@ class Canvas extends Component {
         this.canvas.add(this.layer);
         this.layer.draw();
     }
+    componentWillReceiveProps(nextProps){
+        console.log(nextProps);
+    }
+    shouldComponentUpdate(){
+        return true
+    }
+    componentWillUpdate(){
+        this.layer.draw();
+    }
     handleClick = e => {
-        // console.log(this.props.canvas.toJson());
+        console.log(this.state.canvas.toJSON());
     }
     
     render() {
