@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 const Konva = window.Konva;
 class Circle extends Component {
-    
-    
+
     componentDidMount() {
-        console.log(this.props.canvas.attrs.height);
+        const y =  this.props.canvas.attrs.height/2;
+        const x = this.props.canvas.attrs.width/2;
         const circle = new Konva.Circle({
-            height: this.props.canvas.attrs.height,
-            width: this.props.canvas.attrs.width,
-            radius: 40,
-            fill: "red"
+            y,
+            x,
+            radius: 200,
+            fill: "red",
+            draggable:true
         });
         this.props.layer.add(circle);
         this.props.layer.draw();
@@ -20,5 +20,6 @@ class Circle extends Component {
     render() {
         return null
     }
+
 }
 export default Circle;

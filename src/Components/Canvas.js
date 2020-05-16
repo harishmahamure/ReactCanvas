@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-
 const Konva = window.Konva;
-
+const height = window.innerHeight-100;
+const width = window.innerWidth-100;
 class Canvas extends Component {
     state ={
         canvas: null,
@@ -11,16 +11,18 @@ class Canvas extends Component {
         layer: null,
     }
     componentDidMount() {
-        const canvas = new Konva.Stage({ 
+         this.canvas = new Konva.Stage({ 
             container: this.c,
-            height:this.props.height,
-            width:this.props.width
+            height,
+            width
         });
-        console.log(canvas);
-        const layer = new Konva.Layer();
-        this.setState({canvas,layer});
-        canvas.add(layer);
-        layer.draw();
+        this.layer = new Konva.Layer();
+        this.setState({canvas:this.canvas,layer:this.layer});
+        this.canvas.add(this.layer);
+        this.layer.draw();
+    }
+    handleClick = e => {
+        // console.log(this.props.canvas.toJson());
     }
     
     render() {
@@ -37,7 +39,9 @@ class Canvas extends Component {
                 <div id="container" ref={c=> (this.c = c) }>
                 </div>
                 {this.state.canvas && children}
-                <p>hello</p>
+                <button onClick={this.handleClick}>
+                    Download copy
+                </button>
             </React.Fragment>
         )
     }
