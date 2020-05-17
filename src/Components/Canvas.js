@@ -1,16 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types';
+import mime from 'mime';
 const Konva = window.Konva;
 const height = window.innerHeight-100;
 const width = window.innerWidth-100;
-class Canvas extends Component {
+
+class Canvas extends React.Component {
     state ={
         canvas: null,
         width: null,
         height: null,
         layer: null,
+        children: null,
     }
     componentDidMount() {
+        console.log("Mounted");
          this.canvas = new Konva.Stage({ 
             container: this.c,
             height,
@@ -22,16 +26,25 @@ class Canvas extends Component {
         this.layer.draw();
     }
     componentWillReceiveProps(nextProps){
-        console.log(nextProps);
+
     }
     shouldComponentUpdate(){
         return true
     }
     componentWillUpdate(){
+        this.canvas.add(this.layer);
         this.layer.draw();
     }
     handleClick = e => {
-        console.log(this.state.canvas.toJSON());
+        console.log(mime)
+        function makeFile(){
+            return{
+                mime: 'image/png',
+                file:"canvas.png",
+                contents:this.state.canvas.toDataURL({pixelRatio:3})
+            }
+        }
+        makeFile();
     }
     
     render() {

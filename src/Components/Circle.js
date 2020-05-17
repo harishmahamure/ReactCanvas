@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const Konva = window.Konva;
-class Circle extends Component {
+class Circle extends React.Component {
 
     componentDidMount() {
         const y =  this.props.canvas.attrs.height/2;
