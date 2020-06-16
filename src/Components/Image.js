@@ -8,17 +8,19 @@ class Circle extends React.Component {
     
 
     componentWillReceiveProps(nextProps) {
-
+        console.log(nextProps);
         if(nextProps.base64Image !== this.props.base64Image){
             this.setState({base64Image:nextProps.base64Image});
         }
     }
 
     shouldComponentUpdate(){
+        console.log("updated props");
         return true
     }
 
     componentDidUpdate() {
+        console.log("updated component");
         let image = new Image();
         image.src =`${this.state.base64Image}`;
         // console.log(image);
@@ -36,7 +38,9 @@ class Circle extends React.Component {
         });
     }
 
-    
+    componentDidMount(){
+        console.log(this.props);
+    }
     render() {
         return null
     }

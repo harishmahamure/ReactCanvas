@@ -32,24 +32,21 @@ class Canvas extends React.Component {
         return true
     }
     componentWillUpdate(){
+        console.log(this.canvas);
         this.canvas.add(this.layer);
         this.layer.draw();
     }
     handleClick = e => {
-        console.log(mime)
-        function makeFile(){
-            return{
-                mime: 'image/png',
-                file:"canvas.png",
-                contents:this.state.canvas.toDataURL({pixelRatio:3})
-            }
-        }
-        makeFile();
+        console.log(this.state.canvas.toJSON());
+
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.state.canvas.toJSON()));
+        var dlAnchorElem = document.createElement('a');
+        dlAnchorElem.setAttribute("href",     dataStr     );
+        dlAnchorElem.setAttribute("download", "scene.json");
+        dlAnchorElem.click();
     }
     
     render() {
-        // console.log(Konva);
-        // console.log(this.state.canvas);
         const children = React.Children.map(this.props.children,children =>{
             return React.cloneElement(children,{
                 canvas:this.state.canvas,
@@ -64,6 +61,7 @@ class Canvas extends React.Component {
                 <button onClick={this.handleClick}>
                     Download copy
                 </button>
+                
             </React.Fragment>
         )
     }
